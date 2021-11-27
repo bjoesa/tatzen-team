@@ -1,0 +1,10 @@
+{
+    "name": "Eggi Eggmaker",
+    "short_name": "Eggi",
+    "theme_color": "#262626",
+    "background_color": "#262626",
+    "display": "fullscreen",
+    "orientation": "landscape",
+    "scope": "/",
+    "start_url": "/"
+}
