@@ -1,11 +1,3 @@
-# PAW Pad imitation
-
-- hund.XD mit wires in der cloud
-- 
-
-# Grid aufteilung landscape
-- https://www.w3schools.com/csS/css_grid.asp
-
 # Sounds
 
 login für download
