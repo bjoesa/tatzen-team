@@ -20,7 +20,7 @@
   text-align: center;
   padding: 20px 0;
   font-size: 30px;
-  display: flex;
+  /* display: flex; */
   justify-content: center;
   align-items: center;
 }

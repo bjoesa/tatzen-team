@@ -33,6 +33,10 @@
 
         /* Button controls */
 
+        .buttons {
+            display: block;
+        }
+
         .button {
             border: none;
             border-radius: 8px;
@@ -43,7 +47,7 @@
             padding: 15px;
             text-align: center;
             text-decoration: none;
-            display: inline-block;
+            /* display: inline-block; */
             font-size: 20px;
             margin: 4px 2px;
             cursor: pointer;
@@ -57,18 +61,8 @@
             background-color: lightcoral;
         }
 
-        /* img manipulation
-            https://www.w3schools.com/css/tryit.asp?filename=trycss_ex_images_filters
-        */
-        .invert {filter: invert(100%);}
-        .brightness {filter: brightness(250%);}
-        .contrast {filter: contrast(180%);}
-        .grayscale {filter: grayscale(100%);}
-        .huerotate {filter: hue-rotate(180deg);}
-        .invert {filter: invert(100%);}
-        .opacity {filter: opacity(50%);}
-        .saturate {filter: saturate(7);}
-        
+        /* img manipulation */
+
         .blinker {
             animation: blink 1s infinite;
         }
@@ -82,7 +76,20 @@
             }
         }
 
-        .tatze {
+        .roterblinker {
+            animation: rotblink 1s infinite;
+        }
+
+        @keyframes rotblink {
+            0% {
+                filter: brightness(100%), saturate(7);
+            }
+            100% {
+                filter: brightness(150%);
+            }
+        }
+
+        .tatze, .feuerwehr, .polizei {
             cursor: pointer;
         }
 
@@ -94,7 +101,8 @@
     </style>
 
     <script>
-        let alarm = new Audio('alarm.mp3');
+        let alarm = new Audio('sounds/feuerwehr-sirene.mp3');
+        let policealarm = new Audio('sounds/polizei-sirene.mp3');
         let timerStarted = false;
 
 
@@ -128,13 +136,34 @@
             }
         }
 
-        // reset page to reset timer (workaround)
-        function resetPage() {
-            
-            window.location.reload(true);
-
+        // Soundsteuerung
+        // +++ TODO +++ insert sound loop
+        function fireAlarm() {
+            alarm.play();
+            document.getElementById('blaulicht').className = 'roterblinker';
         }
 
+        function policeAlarm() {
+            policealarm.play();
+            document.getElementById('blaulicht').className = 'blinker';
+        }
+
+        function sirenePause() {
+            alarm.pause();
+            policealarm.pause();
+        }
+
+        function sireneReset() {
+            alarm.currentTime = 0;
+            policealarm.currentTime = 0;
+            alarm.pause();
+            policealarm.pause();
+        }
+
+        // reset page to reset timer (workaround)
+        function resetPage() {
+            window.location.reload(true);
+        }
 
     </script>
 
@@ -149,16 +178,24 @@
       <img id="blaulicht" width="200" height="200" src="img/Blaulicht-state-dunkelblau.png">
   </div>
 
-  <div class="item2">
-    <div class="center timer" id="timer">05 : 00</div>
+  <div class="item2 center">
+    <div class="timer" id="timer">05 : 00</div>
   </div>
 
   <div class="item3">        
-      <button class='button button-stop' onclick="resetPage()">Stop</button>
+        <div class='buttons'>
+            <button class='button button-stop' onclick="resetPage()">Einsatz beenden</button>
+        </div>
+        <div>
+            <button class='button button-start' onclick="sirenePause()">Pause sound</button>
+        </div>
+        <div>
+            <button class='button' onclick="sireneReset()">Stop sound</button>
+        </div>
   </div>  
   
   <div class="item4">
-    <img id="polizei" width="200" height="200" src="img/Polizeihund_mit_Schatten_mit-kreis.png">
+    <img class="polizei" id="polizei" onclick="policeAlarm()" width="200" height="200" src="img/Polizeihund_mit_Schatten_mit-kreis.png">
   </div>
 
   <div class="item5">
@@ -166,7 +203,7 @@
   </div>
   
   <div class="item6">
-    <img id="feuerwehr" width="200" height="200" src="img/Feuerwehrhund_mit_Schatten_mit-kreis.png">
+    <img class="feuerwehr" id="feuerwehr" onclick="fireAlarm()" width="200" height="200" src="img/Feuerwehrhund_mit_Schatten_mit-kreis.png">
   </div>
 </div>
 
