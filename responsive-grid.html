@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tatzen Team App</title>
+    <meta name="description" content="https://github.com/bjoesa/">
+    <meta name="author" content="bjoesa">
+
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="responsive-grid.css">
+    <link rel="stylesheet" href="index.css">
+    <script src="index.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+</head>
+
+<body class="background-dark">
+
+<!-- Grid -->
+
+<div class="grid-container">
+  <div class="item1">
+      <img class="blaulicht" id="blaulicht" width="200" height="200" src="img/Blaulicht-state-dunkelblau.png">
+  </div>
+
+  <div class="item2 center">
+    <div class="timer" id="timer">05 : 00</div>
+  </div>
+
+  <div class="item3">        
+        <div class='buttons'>
+            <button class='button button-stop' onclick="resetPage()">Einsatz beenden</button>
+        </div>
+        <div>
+            <button class='button button-start' onclick="sirenePause()">Pause sound</button>
+        </div>
+        <div>
+            <button class='button' onclick="sireneReset()">Stop sound</button>
+        </div>
+  </div>  
+  
+  <div class="item4">
+    <img class="polizei" id="polizei" onclick="policeAlarm()" src="img/Polizeihund_mit_Schatten_mit-kreis.png">
+  </div>
+
+  <div class="item5">
+    <img onclick="startTimer()" class="tatze" id="tatze" width="200" height="200" src="img/tatze.png">
+  </div>
+  
+  <div class="item6">
+    <img class="feuerwehr" id="feuerwehr" onclick="fireAlarm()" width="200" height="200" src="img/Feuerwehrhund_mit_Schatten_mit-kreis.png">
+  </div>
+  
+</div>
+
+<footer>
+    <button class="right" id="show-info-alert" onclick="infoAlert()">i</button>
+</footer>
+
+<!-- Das Alert script muss nach dem DOM load initialisiert werden, 
+    d.h. immer unten im body stehen 
+    https://sweetalert.js.org/docs/
+-->
+<script>
+
+    const el = document.createElement('div')
+    el.innerHTML = "Drücke auf die Tatze oder unsere beiden Tatzenbuddys und starte einen neuen Einsatz. Mehr Infos findest du auf <a href='https://github.com/bjoesa/' target=_blank>github</a>."
+
+    function infoAlert() {
+        swal({
+            title: "Hi Tatzenfreund.", 
+            content: el,
+        })
+    }
+
+</script>
+
+
+</body>
+
+</html>

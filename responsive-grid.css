@@ -1,0 +1,26 @@
+.item1 { grid-area: blaulicht; }
+.item2 { grid-area: video; }
+.item3 { grid-area: stop; }
+.item4 { grid-area: polizei; }
+.item5 { grid-area: tatze; }
+.item6 { grid-area: feuerwehr; }
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    'blaulicht video stop'
+    'polizei tatze feuerwehr';
+  grid-gap: 10px;
+  background-color: #e65f5f;
+  padding: 5px;
+}
+
+.grid-container > div {
+  background-color: rgba(221, 24, 24, 0.8);
+  text-align: center;
+  padding: 20px 0;
+  font-size: 30px;
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+}
