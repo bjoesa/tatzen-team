@@ -22,7 +22,7 @@ let timerStarted = false;
         function startTimer() {
             if (!timerStarted) {
                 let startTime = new Date().getTime();
-                let fiveMinutes = 1000 * 60 * 5;
+                let fiveMinutes = 1000 * 60 * 1;    // change the 1 to 5 if it should be five minutes instead of the current one
                 let endTime = startTime + fiveMinutes;
 
 
