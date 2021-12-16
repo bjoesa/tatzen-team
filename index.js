@@ -1,3 +1,19 @@
+// Service worker 
+window.addEventListener('load', () => {
+    registerSW();
+});
+
+async function registerSW() {
+    if ('serviceWorker' in navigator) {
+      try {
+        await navigator.serviceWorker.register('./sw.js');
+      } catch (e) {
+        console.log(`SW registration failed`);
+      }
+    }
+}
+
+// Alarm logic
 let alarm = new Audio('sounds/feuerwehr-sirene.mp3');
 let policealarm = new Audio('sounds/polizei-sirene.mp3');
 let timerStarted = false;

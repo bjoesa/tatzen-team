@@ -5,171 +5,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tatzen Team App</title>
-    <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="grid.css">
+    <title>Tatzen Team App INDEX</title>
+    <meta name="description" content="https://github.com/bjoesa/">
+    <meta name="author" content="bjoesa">
 
-    <style>
+    <!-- App stuff, PWA setup
+        https://www.youtube.com/watch?v=E8BeSSdIUW4
+        https://web.dev/add-manifest/?utm_source=devtools
+        https://developer.mozilla.org/de/docs/Web/Manifest -->
+    <link rel="manifest" href="/manifest.webmanifest">
 
-        .background-dark {
-            background-color: #2a3cdb;
-        }
-        
-        .center {
-            display: flex;
-            justify-content: center;
-        }
-        
-        .margin-top {
-            margin-top: 40px;
-        }
-        
-        .timer {
-            font-size: 60px;
-            color: white;
-            font-family: 'Roboto', sans-serif;
-            cursor: not-allowed;
-        }
+    <!-- stylez -->
+    <link rel="stylesheet" href="responsive-grid.css">
+    <link rel="stylesheet" href="index.css">
 
-        /* Button controls */
-
-        .buttons {
-            display: block;
-        }
-
-        .button {
-            border: none;
-            border-radius: 8px;
-            color: black;
-            font-family: 'Arial', sans-serif;
-            text-transform: uppercase;
-            min-width: 150px;
-            padding: 15px;
-            text-align: center;
-            text-decoration: none;
-            /* display: inline-block; */
-            font-size: 20px;
-            margin: 4px 2px;
-            cursor: pointer;
-        }
-
-        .button-start {
-            background-color: yellow;
-        }
-
-        .button-stop {
-            background-color: lightcoral;
-        }
-
-        /* img manipulation */
-
-        .blinker {
-            animation: blink 1s infinite;
-        }
-
-        @keyframes blink {
-            0% {
-                filter: brightness(100%), hue-rotate(180deg);
-            }
-            100% {
-                filter: brightness(250%);
-            }
-        }
-
-        .roterblinker {
-            animation: rotblink 1s infinite;
-        }
-
-        @keyframes rotblink {
-            0% {
-                filter: brightness(100%), saturate(7);
-            }
-            100% {
-                filter: brightness(150%);
-            }
-        }
-
-        .tatze, .feuerwehr, .polizei {
-            cursor: pointer;
-        }
-
-        #tatze:hover {
-            opacity: .5;
-            transform: scaleX(-1);
-        }
-
-    </style>
-
-    <script>
-        let alarm = new Audio('sounds/feuerwehr-sirene.mp3');
-        let policealarm = new Audio('sounds/polizei-sirene.mp3');
-        let timerStarted = false;
-
-
-        function startTimer() {
-            if (!timerStarted) {
-                let startTime = new Date().getTime();
-                let fiveMinutes = 1000 * 60 * 5;
-                let endTime = startTime + fiveMinutes;
-
-
-                var myInterval = setInterval(function() {
-                    let timeLeft = endTime - new Date().getTime();
-
-
-                    if (timeLeft > 0) {
-                        let minutes = timeLeft / (1000 * 60);
-                        minutes = Math.floor(minutes);
-                        let seconds = (timeLeft / 1000) % 60;
-                        seconds = Math.round(seconds);
-                        seconds = ('0' + seconds).slice(-2);
-                        let text = '0'  +  minutes  +  ' : '  +  seconds;
-                        timer.innerHTML = text;
-                        document.getElementById('blaulicht').className = 'blinker';
-                        
-                    } else {
-                        alarm.play();
-                        timer.innerHTML = '00 : 00';
-                    }
-                }, 1000);
-                timerStarted = true;
-            }
-        }
-
-        // Soundsteuerung
-        // +++ TODO +++ insert sound loop
-        function fireAlarm() {
-            alarm.play();
-            document.getElementById('blaulicht').className = 'roterblinker';
-        }
-
-        function policeAlarm() {
-            policealarm.play();
-            document.getElementById('blaulicht').className = 'blinker';
-        }
-
-        function sirenePause() {
-            alarm.pause();
-            policealarm.pause();
-        }
-
-        function sireneReset() {
-            alarm.currentTime = 0;
-            policealarm.currentTime = 0;
-            alarm.pause();
-            policealarm.pause();
-        }
-
-        // reset page to reset timer (workaround)
-        function resetPage() {
-            window.location.reload(true);
-        }
-
-    </script>
+    <!-- animations -->
+    <script src="index.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 </head>
 
-<body class="background-dark">
+<body>
 
 <!-- Grid -->
 
@@ -179,7 +35,8 @@
   </div>
 
   <div class="item2 center">
-    <div class="timer" id="timer">05 : 00</div>
+    <!-- <div class="timer" id="timer">05 : 00</div> -->
+    <img class="gifImg" src="https://media0.giphy.com/media/2Ur4qvS7WXfkZJSBOE/giphy.gif?cid=790b7611da205f3af70711916cf394ee7039782defe3957f&rid=giphy.gif&ct=g" alt="Giphy RTW GIF">
   </div>
 
   <div class="item3">        
@@ -207,6 +64,25 @@
   </div>
 </div>
 
+<button class="float" onclick="infoAlert()">
+    <i class="my-float">+</i>
+</button>
+
+<!-- Das Alert script muss nach dem DOM load initialisiert werden, 
+    d.h. immer unten im body stehen (https://sweetalert.js.org/docs/) -->
+<script>
+
+    const el = document.createElement('div')
+    el.innerHTML = "Gib mir die Tatze und warte 5 Minuten oder drücke unsere beiden Tatzenbuddys und starte einen neuen Einsatz. <br> Der View ist optimiert für Screensize 592x336px. Mehr Infos findest du auf <a href='https://github.com/bjoesa/' target=_blank>github</a>."
+
+    function infoAlert() {
+        swal({
+            title: "Hi Tatzenfreund.", 
+            content: el,
+        })
+    }
+
+</script>
 
 </body>
 

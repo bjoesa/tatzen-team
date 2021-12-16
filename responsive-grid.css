@@ -1,5 +1,6 @@
 .item1 { grid-area: blaulicht; }
-.item2 { grid-area: video; }
+.item2 { grid-area: video; 
+        background-color: transparent !important;}
 .item3 { grid-area: stop; }
 .item4 { grid-area: polizei; }
 .item5 { grid-area: tatze; }
@@ -11,16 +12,39 @@
     'blaulicht video stop'
     'polizei tatze feuerwehr';
   grid-gap: 10px;
-  background-color: #e65f5f;
-  padding: 5px;
+  /* background-color: #e65f5f; */
+  /* padding: 5px; */
+  height: 100%;
 }
 
 .grid-container > div {
   background-color: rgba(221, 24, 24, 0.8);
   text-align: center;
-  padding: 20px 0;
+  /* padding: 20px 0; */
   font-size: 30px;
-  /* display: flex; */
+  display: grid;
   justify-content: center;
   align-items: center;
+  
+}
+
+/* floating Button */
+.float{
+	position:fixed;
+	width:45px;
+	height:45px;
+	bottom:20px;
+	right:20px;
+	background-color:rgb(59, 59, 59);
+	color:#FFF;
+	border-radius:50px;
+  border: solid;
+	/* text-align:center; */
+	box-shadow: 2px 2px 3px #999;
+}
+
+.my-float{
+  font-size: larger;
+  font-weight: 500;
+	margin-top:22px;
 }
